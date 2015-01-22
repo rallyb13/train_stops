@@ -22,7 +22,6 @@ end
 
 get('/lines/:line_id') do
   @line = Line.find(params.fetch("line_id").to_i())
-  @stations = Station.all()
   erb(:lines)
 end
 
@@ -35,4 +34,9 @@ post('/add_station') do
   @line.add_stop(@station)
   @stations = Station.all()
   erb(:lines)
+end
+
+get('/station/:station_id') do
+  @station = Station.find(params.fetch("station_id").to_i())
+  erb(:station)
 end

@@ -45,7 +45,35 @@ describe(Station) do
       test_station.save()
       test_station2 = Station.new({:platform => "Snake Street"})
       test_station2.save()
-      expect(Station.find("Snake Street")).to(be_an_instance_of(Fixnum))
+      expect(Station.find(test_station.station_id())).to(eq(test_station))
     end
   end
+
+  describe(".service") do
+    it('will return line or lines that service each station') do
+      test_line = Line.new({:color => "Turquoise"})
+      test_line.save()
+      test_station = Station.new({:platform => "Foggy Bottom"})
+      test_station.save()
+      test_line.add_stop(test_station)
+      expect(Station.service(test_station.station_id())).to(eq(test_line))
+    end
+  end
+
+# describe(".service") do
+#   it('will return line or lines that service each station') do
+#     test_line = Line.new({:color => "Turquoise"})
+#     test_line.save()
+#     test_station = Station.new({:platform => "Foggy Bottom"})
+#     test_station.save()
+#     test_line.add_stop(test_station)
+    # test_line2 = Line.new({:color => "Sienna"})
+    # test_line2.save()
+    # test_station = Station.new({:platform => "Foggy Bottom"})
+    # test_station.save()
+    # test_line.add_stop(test_station)
+#     expect(Station.service(test_station.station_id())).to(eq(test_line))
+#   end
+# end
+
 end

@@ -31,11 +31,19 @@ class Station
   define_singleton_method(:find) do |search_term|
     found_station = nil
     Station.all().each() do |station|
-      if station.platform().eql?(search_term)
+      if station.station_id().eql?(search_term)
         found_station = station
       end
     end
-    found_station.station_id().to_i()
+    found_station
   end
 
+  define_singleton_method(:service) do |this_station_id|
+    # this_station = DB.exec("SELECT * FROM stations WHERE RETURNING station_id;")
+
+    this_station.station_id()
+    return_lines = DB.exec("SELECT * FROM stops WHERE station_id = #{this_station};")
+    station_lines = return_lines.first().fetch("line_id").to_i()
+    station_lines
+  end
 end
