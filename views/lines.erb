@@ -1,0 +1,22 @@
+<h1>Here are the stations on the <%= @line.color() %> line:</h1>
+
+<% if @stations.any?() %>
+
+  <ul>
+    <% @stations.each() do |station| %>
+      <li><%= station.platform() %></li>
+    <% end %>
+  </ul>
+
+<% else %>
+  <p>Please help to map the city's train system by adding your nearest
+    station on the <%= @line.color() %> line!</p>
+<% end %>
+
+<form action="/add_station" method="post">
+  <input id="line_id" name="line_id" type="hidden" value="<%= @line.line_id() %>">
+  <label for="platform">Add a station:</label>
+  <input type="text" name="platform" id="platform">
+
+  <button type="submit">Add it!</button>
+</form>

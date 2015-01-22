@@ -39,4 +39,15 @@ class Line
     @stop_id = this_stop.first().fetch("stop_id").to_i()
     @stop_id
   end
+
+  define_singleton_method(:find) do |line_id|
+    found_line = nil
+    Line.all().each() do |line|
+      if line.line_id().eql?(line_id)
+        found_line = line
+      end
+    end
+    found_line
+  end
+
 end

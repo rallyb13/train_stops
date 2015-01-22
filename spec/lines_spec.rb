@@ -55,4 +55,14 @@ describe(Line) do
       expect(test_line.add_stop(test_station)).to(be_an_instance_of(Fixnum))
     end
   end
+
+  describe(".find") do
+    it('finds a specific line') do
+      test_line = Line.new({:color => "Turquoise"})
+      test_line.save()
+      test_line2 = Line.new({:color => "Sienna"})
+      test_line2.save()
+      expect(Line.find(test_line2.line_id())).to(eq(test_line2))
+    end
+  end
 end

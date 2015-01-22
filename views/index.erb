@@ -1,0 +1,24 @@
+<h1>Trains! Whoo! Whoo!</h1>
+
+<form action="/add_line" method="post">
+  <label for="color">Add a line to the train system:</label>
+  <input id="color" name="color" type="text">
+
+  <button type="submit">Add the line</button>
+
+</form>
+
+
+<% if @lines.any?() %>
+
+<ul>
+  <% @lines.each() do |line| %>
+  <li><a href="/lines/<%= line.line_id() %>"> <%= line.color() %></a></li>
+  <% end %>
+
+</ul>
+
+<% else %>
+  <p>Please help to map the city's train system by adding your nearest train line!</p>
+
+<% end %>
